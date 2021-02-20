@@ -44,4 +44,11 @@ class RDSStack(core.Stack):
         ssm.StringParameter(self, 'db-host',
                             parameter_name=f"/{env_name}/db-host",
                             string_value=db_mysql.cluster_endpoint.hostname)
+        ssm.StringParameter(self, 'db-secret-name',
+                            parameter_name=f"/{env_name}/db-secret-name",
+                            string_value=db_mysql.secret.secret_name)
+
+
+
+
 

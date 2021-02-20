@@ -16,7 +16,6 @@ class S3Stack(core.Stack):
 
         # create an S3 bucket
         lambda_bucket = s3.Bucket(self, 'lambda-bucket',
-                                  bucket_name=f'{account_id}-{env_name}-lambda-deploy-packages',
                                   access_control=s3.BucketAccessControl.BUCKET_OWNER_FULL_CONTROL,
                                   encryption=s3.BucketEncryption.S3_MANAGED,
                                   block_public_access=s3.BlockPublicAccess(
@@ -25,7 +24,7 @@ class S3Stack(core.Stack):
                                       ignore_public_acls=True,
                                       restrict_public_buckets=True
                                   ),
-                                  removal_policy=core.RemovalPolicy.RETAIN
+                                  removal_policy=core.RemovalPolicy.DESTROY
                                   )
 
         ssm.StringParameter(self, 'ssm-lambda-bucket',
@@ -35,7 +34,6 @@ class S3Stack(core.Stack):
 
         # pipeline artifacts bucket
         artifacts_bucket = s3.Bucket(self, 'artifact-bucket',
-                                     bucket_name=f"{account_id}-{env_name}-artifacts-bucket",
                                      access_control=s3.BucketAccessControl.BUCKET_OWNER_FULL_CONTROL,
                                      encryption=s3.BucketEncryption.S3_MANAGED,
                                      block_public_access=s3.BlockPublicAccess(
@@ -52,7 +50,6 @@ class S3Stack(core.Stack):
 
         # frontend bucket
         artifacts_bucket = s3.Bucket(self, 'frontend',
-                                     bucket_name=f"{account_id}-{env_name}-frontend",
                                      access_control=s3.BucketAccessControl.BUCKET_OWNER_FULL_CONTROL,
                                      encryption=s3.BucketEncryption.S3_MANAGED,
                                      block_public_access=s3.BlockPublicAccess(

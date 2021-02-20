@@ -42,7 +42,7 @@ class SecurityStack(core.Stack):
                                ])
         lambda_role.add_to_policy(
             statement=iam.PolicyStatement(
-                actions=['s3:*', 'rds:*'],
+                actions=['s3:*', 'rds:*', 'ec2:*'],
                 resources=['*']
 
             )

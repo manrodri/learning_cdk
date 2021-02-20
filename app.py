@@ -8,6 +8,10 @@ from stacks.rds_stack import RDSStack
 from stacks.cognito_stack import CognitoStack
 from stacks.apigw_stack import APIStack
 from stacks.lambda_stack import LambdaStack
+from stacks.codepipeline_stack import CodePipelineBackendStack
+from stacks.notifications_stack import NotifiacationStack
+from stacks.cdn_stack import CDNStack
+from stacks.codepipeline_frontend import CodePipelineFrontendStack
 
 app = core.App()
 
@@ -30,5 +34,12 @@ rds_stack = RDSStack(app, 'rds-stack',
 cognito_stack = CognitoStack(app, 'cognito-stack', env={'region': 'eu-west-1'})
 apigw_stack = APIStack(app, 'apigw-stack', env={'region': 'eu-west-1'})
 lambda_stack = LambdaStack(app,'lambda-stack')
+cp_backend = CodePipelineBackendStack(app, 'cp-backend',
+                                      artifactbucket=core.Fn.import_value('build-artifacts-bucket'),
+                                      env={'region': 'eu-west-1'})
+notifications_stack = NotifiacationStack(app, 'notifications-stack', env={'region': 'eu-west-1'})
+cdn_stack = CDNStack(app, 'cdn-stack', s3bucket=core.Fn.import_value('frontend-bucket'))
+cp_frontend = CodePipelineFrontendStack(app, 'cp-frontend', frontendBucket=core.Fn.import_value('frontend-bucket'), env={'region': 'eu-west-1'})
+
 
 app.synth()

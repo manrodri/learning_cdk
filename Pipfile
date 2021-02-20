@@ -19,6 +19,12 @@ boto3 = "==1.10.*"
 "aws-cdk.aws-codebuild" = "*"
 "aws-cdk.aws-codepipeline" = "*"
 "aws-cdk.aws-codepipeline-actions" = "*"
+"aws-cdk.aws-events" = "*"
+"aws-cdk.aws-events-targets" = "*"
+"aws-cdk.aws-sns" = "*"
+"aws-cdk.aws-sns-subscriptions" = "*"
+"aws-cdk.aws-cloudfront" = "*"
+"aws-cdk.aws-codecommit" = "*"
 
 [dev-packages]
 
